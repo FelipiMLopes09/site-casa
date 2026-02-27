@@ -1,172 +1,735 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Casa Azul da Praia | Piscina Privativa</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Casa Azul da Praia | Piscina Privativa</title>
+  <meta name="description" content="Casa Azul da Praia: conforto, exclusividade e piscina privativa para sua estadia. Reserve pelo Airbnb." />
+  <meta name="theme-color" content="#0b0b0b" />
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-body{
-font-family:'Poppins',sans-serif;
-background:#0f0f0f;
-color:#fff;
-}
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --panel:#121212;
+      --panel2:#161616;
+      --text:#f5f5f5;
+      --muted:#b6b6b6;
+      --gold:#d4af37;
+      --gold2:#f1d77a;
+      --line:rgba(255,255,255,.08);
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1120px;
+    }
 
-header{
-height:100vh;
-background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-url('https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=1600') center/cover;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:20px;
-}
+    *{box-sizing:border-box; margin:0; padding:0;}
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background: radial-gradient(1200px 700px at 15% 10%, rgba(212,175,55,.12), transparent 55%),
+                  radial-gradient(1000px 700px at 85% 15%, rgba(241,215,122,.08), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
 
-header h1{
-font-family:'Playfair Display',serif;
-font-size:3rem;
-margin-bottom:20px;
-}
+    a{color:inherit}
+    .container{width:min(var(--max), 92%); margin:0 auto;}
+    .pill{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px; border:1px solid var(--line);
+      border-radius:999px; background:rgba(255,255,255,.04);
+      color:var(--muted); font-size:.92rem;
+      backdrop-filter: blur(8px);
+    }
+    .dot{width:7px; height:7px; border-radius:999px; background:var(--gold);}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:14px 18px; border-radius:999px;
+      border:1px solid rgba(212,175,55,.45);
+      background: linear-gradient(180deg, rgba(212,175,55,.95), rgba(212,175,55,.78));
+      color:#0b0b0b; font-weight:600; text-decoration:none;
+      box-shadow: 0 16px 40px rgba(212,175,55,.18);
+      transition: transform .2s ease, filter .2s ease;
+    }
+    .btn:hover{transform: translateY(-1px); filter:saturate(1.08);}
+    .btn.secondary{
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:var(--text);
+      box-shadow:none;
+    }
 
-header p{
-font-size:1.2rem;
-margin-bottom:30px;
-}
+    /* Topbar */
+    .topbar{
+      position:fixed; inset:0 0 auto 0;
+      padding:16px 0;
+      z-index:50;
+      background: linear-gradient(180deg, rgba(11,11,11,.85), rgba(11,11,11,.55), transparent);
+      backdrop-filter: blur(10px);
+    }
+    .topbar .row{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; text-decoration:none;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(212,175,55,.95), rgba(241,215,122,.65));
+      box-shadow: 0 14px 34px rgba(212,175,55,.18);
+    }
+    .brand strong{
+      font-family:"Playfair Display",serif;
+      letter-spacing:.2px;
+      font-size:1.06rem;
+    }
+    .nav{
+      display:flex; gap:16px; align-items:center;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+    .nav a{
+      text-decoration:none;
+      padding:10px 10px;
+      border-radius:999px;
+      transition: background .2s ease, color .2s ease;
+    }
+    .nav a:hover{
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+    }
 
-.btn{
-background:#d4af37;
-color:#000;
-padding:15px 30px;
-text-decoration:none;
-font-weight:500;
-border-radius:30px;
-transition:0.3s;
-}
+    /* Hero */
+    .hero{
+      min-height: 92vh;
+      padding: 120px 0 48px;
+      position:relative;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-200px -80px auto -80px;
+      height: 720px;
+      background:
+        radial-gradient(600px 450px at 20% 35%, rgba(212,175,55,.18), transparent 60%),
+        radial-gradient(520px 420px at 75% 35%, rgba(255,255,255,.06), transparent 60%);
+      pointer-events:none;
+      filter: blur(0px);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:28px;
+      align-items:center;
+    }
+    .h-title{
+      font-family:"Playfair Display",serif;
+      font-size: clamp(2.2rem, 4.2vw, 3.5rem);
+      line-height:1.05;
+      margin:14px 0 14px;
+      letter-spacing:.2px;
+    }
+    .h-sub{
+      color:var(--muted);
+      font-size:1.05rem;
+      line-height:1.65;
+      max-width: 52ch;
+      margin-bottom:22px;
+    }
+    .h-actions{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top: 8px;
+    }
 
-.btn:hover{
-background:#fff;
-}
+    .hero-card{
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      padding:16px;
+      box-shadow: var(--shadow);
+    }
+    .hero-cover{
+      border-radius: 20px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      background:#0e0e0e;
+      position:relative;
+      aspect-ratio: 4 / 3;
+    }
+    .hero-cover img{
+      width:100%; height:100%; object-fit:cover;
+      transform: scale(1.02);
+      filter: contrast(1.05) saturate(1.06);
+    }
+    .hero-badges{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .badge{
+      flex:1;
+      min-width: 160px;
+      background:rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding:12px 12px;
+      color:var(--muted);
+    }
+    .badge b{color:var(--text); font-weight:600; display:block; margin-bottom:4px;}
+    .badge span{font-size:.92rem; line-height:1.4;}
 
-section{
-padding:80px 10%;
-}
+    /* Sections */
+    section{padding: 70px 0;}
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
+      margin-bottom:22px;
+    }
+    .section-head h2{
+      font-family:"Playfair Display",serif;
+      font-size: 2rem;
+      letter-spacing:.2px;
+    }
+    .section-head p{color:var(--muted); max-width: 58ch; line-height:1.6;}
 
-.section-title{
-font-family:'Playfair Display',serif;
-font-size:2rem;
-margin-bottom:40px;
-text-align:center;
-}
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .card{
+      grid-column: span 4;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+    }
+    .card h3{
+      font-size:1.06rem;
+      margin-bottom:10px;
+      color:var(--gold2);
+      font-weight:600;
+      letter-spacing:.2px;
+    }
+    .card p{color:var(--muted); line-height:1.65; font-size:.98rem;}
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-}
+    /* Gallery */
+    .gallery-wrap{
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      padding:16px;
+      box-shadow: var(--shadow);
+    }
+    .slider{
+      position:relative;
+      border-radius: 20px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      background:#0e0e0e;
+      aspect-ratio: 16 / 9;
+      touch-action: pan-y;
+    }
+    .slides{
+      display:flex;
+      height:100%;
+      transition: transform .35s ease;
+    }
+    .slide{
+      min-width:100%;
+      height:100%;
+      position:relative;
+    }
+    .slide img{
+      width:100%; height:100%;
+      object-fit:cover;
+      filter: contrast(1.05) saturate(1.06);
+    }
+    .slider-controls{
+      position:absolute;
+      inset:auto 12px 12px 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      pointer-events:none;
+    }
+    .ctrl{
+      pointer-events:auto;
+      border:none;
+      width:44px; height:44px;
+      border-radius:999px;
+      background: rgba(0,0,0,.45);
+      border:1px solid rgba(255,255,255,.14);
+      color:#fff;
+      display:grid; place-items:center;
+      cursor:pointer;
+      backdrop-filter: blur(8px);
+    }
+    .dots{
+      pointer-events:auto;
+      display:flex; gap:8px;
+      background: rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.12);
+      padding:8px 10px;
+      border-radius:999px;
+      backdrop-filter: blur(8px);
+    }
+    .dots button{
+      width:9px; height:9px; border-radius:999px;
+      border:none; cursor:pointer;
+      background: rgba(255,255,255,.35);
+    }
+    .dots button.active{background: var(--gold);}
 
-.card{
-background:#1c1c1c;
-padding:30px;
-border-radius:15px;
-text-align:center;
-}
+    .thumbs{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+      margin-top:12px;
+    }
+    .thumb{
+      border-radius: 14px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background:#0e0e0e;
+      aspect-ratio: 4 / 3;
+      cursor:pointer;
+      opacity:.85;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .thumb:hover{opacity:1; transform: translateY(-1px);}
+    .thumb img{width:100%; height:100%; object-fit:cover;}
 
-.card h3{
-margin-bottom:15px;
-color:#d4af37;
-}
+    /* Location */
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      padding:18px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+    }
+    .panel h3{color:var(--gold2); font-size:1.05rem; margin-bottom:10px;}
+    .panel p{color:var(--muted); line-height:1.65;}
+    .map{
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background:#0e0e0e;
+      min-height: 320px;
+    }
+    iframe{width:100%; height:100%; border:0;}
 
-footer{
-background:#000;
-text-align:center;
-padding:30px;
-}
+    /* FAQ */
+    details{
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius: 16px;
+      padding:14px 14px;
+    }
+    details + details{margin-top:10px;}
+    summary{
+      cursor:pointer;
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      color: var(--text);
+      font-weight:600;
+    }
+    summary::-webkit-details-marker{display:none;}
+    details p{
+      margin-top:10px;
+      color:var(--muted);
+      line-height:1.65;
+      font-weight:400;
+    }
 
-footer p{
-font-size:0.9rem;
-color:#aaa;
-}
+    /* Footer */
+    footer{
+      border-top:1px solid var(--line);
+      padding:34px 0 44px;
+      color:var(--muted);
+    }
+    .foot{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:18px;
+      flex-wrap:wrap;
+    }
+    .foot strong{
+      color:var(--text);
+      font-family:"Playfair Display",serif;
+      font-size:1.2rem;
+    }
+    .mini{
+      font-size:.92rem;
+      line-height:1.6;
+      max-width: 60ch;
+    }
 
-.whatsapp{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25D366;
-color:#fff;
-padding:15px 20px;
-border-radius:50px;
-text-decoration:none;
-font-weight:500;
-}
-</style>
+    /* WhatsApp floating */
+    .wa{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:60;
+      text-decoration:none;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:13px 16px;
+      border-radius: 999px;
+      color:#0b0b0b;
+      background: linear-gradient(180deg, #25D366, #1fb857);
+      font-weight:700;
+      box-shadow: 0 18px 40px rgba(0,0,0,.55);
+    }
+    .wa small{font-weight:600; opacity:.9;}
+    .wa:hover{filter:saturate(1.05);}
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr; gap:18px;}
+      .split{grid-template-columns:1fr;}
+      .card{grid-column: span 6;}
+      .nav{display:none;}
+    }
+    @media (max-width: 560px){
+      .card{grid-column: span 12;}
+      .thumbs{grid-template-columns:repeat(2,1fr);}
+      .hero{padding-top: 110px;}
+    }
+  </style>
 </head>
 
 <body>
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="container">
+      <div class="row">
+        <a class="brand" href="#top">
+          <div class="logo" aria-hidden="true"></div>
+          <strong>Casa Azul da Praia</strong>
+        </a>
 
-<header>
-<div>
-<h1>Casa Azul da Praia</h1>
-<p>Exclusividade, conforto e piscina privativa para momentos inesquecíveis</p>
-<a href="https://www.airbnb.com.br/rooms/974876805272327881" class="btn" target="_blank">Reservar Agora</a>
-</div>
-</header>
+        <nav class="nav" aria-label="Navegação">
+          <a href="#galeria">Galeria</a>
+          <a href="#diferenciais">Diferenciais</a>
+          <a href="#localizacao">Localização</a>
+          <a href="#faq">Dúvidas</a>
+        </nav>
 
-<section>
-<h2 class="section-title">Sobre a Casa</h2>
-<div class="grid">
-<div class="card">
-<h3>🏡 Acomoda até 8 hóspedes</h3>
-<p>Ambiente espaçoso ideal para famílias e grupos.</p>
-</div>
+        <a class="btn secondary" href="https://www.airbnb.com.br/rooms/974876805272327881" target="_blank" rel="noopener">Ver no Airbnb</a>
+      </div>
+    </div>
+  </div>
 
-<div class="card">
-<h3>🏊 Piscina Privativa</h3>
-<p>Área externa exclusiva para lazer e descanso.</p>
-</div>
+  <!-- HERO -->
+  <main id="top" class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="pill"><span class="dot"></span> Piscina privativa • conforto • lazer</span>
 
-<div class="card">
-<h3>🍖 Espaço Gourmet</h3>
-<p>Churrasqueira completa para momentos especiais.</p>
-</div>
+          <h1 class="h-title">Um refúgio elegante para curtir a praia com exclusividade.</h1>
+          <p class="h-sub">
+            A Casa Azul da Praia foi pensada para descanso e momentos inesquecíveis.
+            Ambiente amplo, área externa convidativa e tudo o que você precisa para uma estadia perfeita.
+          </p>
 
-<div class="card">
-<h3>📍 Localização Privilegiada</h3>
-<p>Próximo ao mar e ao centro de Tramandaí.</p>
-</div>
-</div>
-</section>
+          <div class="h-actions">
+            <a class="btn" href="https://www.airbnb.com.br/rooms/974876805272327881" target="_blank" rel="noopener">
+              Reservar no Airbnb
+              <span aria-hidden="true">→</span>
+            </a>
+            <a class="btn secondary" href="#galeria">Ver fotos</a>
+          </div>
 
-<section>
-<h2 class="section-title">Diferenciais</h2>
-<div class="grid">
-<div class="card">
-<h3>⭐ Avaliação Excelente</h3>
-<p>Hospedagem altamente recomendada pelos hóspedes.</p>
-</div>
+          <div class="hero-badges" style="margin-top:16px;">
+            <div class="badge">
+              <b>Ideal para grupos</b>
+              <span>Conforto e espaço para curtir em família ou amigos.</span>
+            </div>
+            <div class="badge">
+              <b>Piscina privativa</b>
+              <span>Lazer exclusivo com total privacidade.</span>
+            </div>
+          </div>
+        </div>
 
-<div class="card">
-<h3>🚗 Estacionamento</h3>
-<p>2 vagas cobertas disponíveis.</p>
-</div>
+        <div class="hero-card">
+          <div class="hero-cover">
+            <!-- TROQUE esta imagem por uma foto real da sua casa -->
+            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600" alt="Foto destaque da casa" />
+          </div>
+          <div class="hero-badges">
+            <div class="badge">
+              <b>Check-in fácil</b>
+              <span>Orientações claras e chegada sem estresse.</span>
+            </div>
+            <div class="badge">
+              <b>Ambiente premium</b>
+              <span>Design elegante e foco no conforto.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
-<div class="card">
-<h3>📶 Wi-Fi & Conforto</h3>
-<p>Internet, ar-condicionado e cozinha completa.</p>
-</div>
-</div>
-</section>
+  <!-- GALERIA -->
+  <section id="galeria">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Galeria</h2>
+          <p>Troque as imagens abaixo pelas fotos reais do seu Airbnb para o site ficar “de verdade”.</p>
+        </div>
+        <a class="btn secondary" href="https://www.airbnb.com.br/rooms/974876805272327881" target="_blank" rel="noopener">Mais detalhes no Airbnb</a>
+      </div>
 
-<footer>
-<p>© 2026 Casa Azul da Praia • Todos os direitos reservados</p>
-</footer>
+      <div class="gallery-wrap">
+        <div class="slider" aria-label="Carrossel de imagens">
+          <div class="slides" id="slides">
+            <!-- 1 -->
+            <div class="slide"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1600" alt="Área externa" /></div>
+            <!-- 2 -->
+            <div class="slide"><img src="https://images.unsplash.com/photo-1502005097973-6a7082348e28?q=80&w=1600" alt="Piscina" /></div>
+            <!-- 3 -->
+            <div class="slide"><img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=1600" alt="Sala" /></div>
+            <!-- 4 -->
+            <div class="slide"><img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1600" alt="Quarto" /></div>
+          </div>
 
-<a class="whatsapp" href="https://wa.me/SEUNUMEROAQUI" target="_blank">
-📲 Falar no WhatsApp
-</a>
+          <div class="slider-controls">
+            <button class="ctrl" id="prev" aria-label="Imagem anterior">‹</button>
+            <div class="dots" id="dots" aria-label="Indicadores"></div>
+            <button class="ctrl" id="next" aria-label="Próxima imagem">›</button>
+          </div>
+        </div>
 
+        <div class="thumbs" id="thumbs" aria-label="Miniaturas"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFERENCIAIS -->
+  <section id="diferenciais">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Diferenciais</h2>
+          <p>Uma apresentação objetiva e premium para converter visita em reserva.</p>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <h3>🏊 Piscina privativa</h3>
+          <p>Área exclusiva para relaxar com privacidade e tranquilidade.</p>
+        </div>
+        <div class="card">
+          <h3>🍖 Espaço gourmet</h3>
+          <p>Churrasqueira e área externa pronta para encontros e momentos especiais.</p>
+        </div>
+        <div class="card">
+          <h3>📶 Conforto completo</h3>
+          <p>Ambiente pensado para estadias longas: praticidade, organização e conforto.</p>
+        </div>
+
+        <div class="card">
+          <h3>🚗 Estacionamento</h3>
+          <p>Espaço para veículos com comodidade e segurança.</p>
+        </div>
+        <div class="card">
+          <h3>🧼 Experiência premium</h3>
+          <p>Apresentação impecável, foco em limpeza e atendimento eficiente.</p>
+        </div>
+        <div class="card">
+          <h3>🌊 Praia e região</h3>
+          <p>Localização estratégica para aproveitar praia, mercado e gastronomia local.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCALIZAÇÃO -->
+  <section id="localizacao">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Localização</h2>
+          <p>Você pode mostrar a região sem divulgar o endereço exato. Cole aqui o mapa aproximado do bairro.</p>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="panel">
+          <h3>📍 Como chegar</h3>
+          <p>
+            Informe aqui o bairro/cidade e pontos de referência (ex.: “próximo à praia”, “perto do centro”, “mercado a X min”).
+            Isso melhora conversão e confiança.
+          </p>
+          <p style="margin-top:10px;">
+            <b style="color:var(--text)">Dica:</b> coloque também “o que tem perto” (mercados, farmácia, restaurantes).
+          </p>
+
+          <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="btn" href="https://www.airbnb.com.br/rooms/974876805272327881" target="_blank" rel="noopener">Ver datas no Airbnb</a>
+            <a class="btn secondary" href="#faq">Dúvidas frequentes</a>
+          </div>
+        </div>
+
+        <div class="map" aria-label="Mapa do Google">
+          <!-- COMO CONFIGURAR:
+               1) Abra Google Maps → escolha a área aproximada
+               2) Clique em Compartilhar → Incorporar um mapa
+               3) Copie o iframe e substitua o iframe abaixo
+          -->
+          <iframe
+            src="https://www.google.com/maps?q=Tramanda%C3%AD%20RS&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Mapa aproximado"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Dúvidas frequentes</h2>
+          <p>Respostas diretas para reduzir mensagens e aumentar reservas.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <details>
+          <summary>Como funciona a reserva? <span aria-hidden="true">+</span></summary>
+          <p>Você reserva diretamente pelo Airbnb. Clique em “Reservar no Airbnb”, escolha as datas e finalize o pagamento por lá.</p>
+        </details>
+
+        <details>
+          <summary>A casa é inteira e exclusiva? <span aria-hidden="true">+</span></summary>
+          <p>Sim. A hospedagem é privativa para você e seu grupo (casa inteira).</p>
+        </details>
+
+        <details>
+          <summary>Quais são os horários de check-in e check-out? <span aria-hidden="true">+</span></summary>
+          <p>Coloque aqui seus horários reais (ex.: check-in 13h / check-out 10h).</p>
+        </details>
+
+        <details>
+          <summary>Posso levar pet? <span aria-hidden="true">+</span></summary>
+          <p>Coloque aqui a sua regra real (sim/não e condições).</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>
+          <strong>Casa Azul da Praia</strong>
+          <div class="mini" style="margin-top:8px;">
+            Site oficial para apresentação e reservas via Airbnb.  
+            <br>© <span id="year"></span> • Todos os direitos reservados.
+          </div>
+        </div>
+        <div class="mini">
+          <div style="margin-bottom:8px; color:var(--text); font-weight:600;">Reservas</div>
+          <a href="https://www.airbnb.com.br/rooms/974876805272327881" target="_blank" rel="noopener" style="text-decoration:none;">
+            Abrir anúncio no Airbnb →
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP (troque SEUNUMERO) -->
+  <a class="wa" id="waBtn" href="https://wa.me/55SEUNUMEROAQUI?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Casa%20Azul%20da%20Praia%20e%20quero%20saber%20datas%20dispon%C3%ADveis." target="_blank" rel="noopener">
+    📲 <span>WhatsApp</span> <small>• falar agora</small>
+  </a>
+
+  <script>
+    // Ano automático
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Slider simples (setas, dots, thumbs, swipe)
+    const slidesEl = document.getElementById("slides");
+    const slideImgs = Array.from(slidesEl.querySelectorAll("img")).map(img => img.src);
+    const dotsEl = document.getElementById("dots");
+    const thumbsEl = document.getElementById("thumbs");
+
+    let index = 0;
+
+    function renderDots(){
+      dotsEl.innerHTML = "";
+      slideImgs.forEach((_, i) => {
+        const b = document.createElement("button");
+        b.setAttribute("aria-label", "Ir para imagem " + (i+1));
+        b.className = i === index ? "active" : "";
+        b.addEventListener("click", () => goTo(i));
+        dotsEl.appendChild(b);
+      });
+    }
+
+    function renderThumbs(){
+      thumbsEl.innerHTML = "";
+      slideImgs.forEach((src, i) => {
+        const t = document.createElement("div");
+        t.className = "thumb";
+        t.title = "Imagem " + (i+1);
+        t.innerHTML = `<img src="${src}" alt="Miniatura ${i+1}">`;
+        t.addEventListener("click", () => goTo(i));
+        thumbsEl.appendChild(t);
+      });
+    }
+
+    function goTo(i){
+      index = (i + slideImgs.length) % slideImgs.length;
+      slidesEl.style.transform = `translateX(-${index * 100}%)`;
+      renderDots();
+    }
+
+    document.getElementById("prev").addEventListener("click", () => goTo(index - 1));
+    document.getElementById("next").addEventListener("click", () => goTo(index + 1));
+
+    // Swipe no mobile
+    let startX = null;
+    const slider = document.querySelector(".slider");
+    slider.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    }, {passive:true});
+    slider.addEventListener("touchend", (e) => {
+      if(startX === null) return;
+      const endX = e.changedTouches[0].clientX;
+      const diff = endX - startX;
+      if(Math.abs(diff) > 40){
+        if(diff > 0) goTo(index - 1);
+        else goTo(index + 1);
+      }
+      startX = null;
+    });
+
+    renderThumbs();
+    renderDots();
+    goTo(0);
+  </script>
 </body>
 </html>
